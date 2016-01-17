@@ -1,0 +1,18 @@
+.btn-default:hover,
+.btn-default:active,
+.btn-default.active,
+.btn-default:focus {
+	color: #ffffff !important;
+	background-color: #3399FF !important;
+	border-color: #3399FF !important;
+}
+
+p {
+	font-family: 'Oswald', sans-serif; !important;
+	font-size: 20px !important;
+}
+
+.extra-paddingLR {
+	padding-left:5px;
+	padding-right:5px;
+}
