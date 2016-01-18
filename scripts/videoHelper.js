@@ -75,6 +75,7 @@ function determinePlayback() {
 	}
 	else {
 		loadChromecast();
+		initializeCastApi();
 	}
 }
 

@@ -29,7 +29,10 @@ function initializeCastApi() {
 //COME BACK TO LATER
 function onInitSuccess() {
 	console.log('init success');
-	launchApp();
+	if(mediaURL != null) {
+		launchApp();
+	}
+
 	// storedSession = JSON.parse(localStorage.getItem('storedSession'));
 	// if (storedSession) {
 		// var dateString = storedSession.timestamp;

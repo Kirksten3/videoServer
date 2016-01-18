@@ -25,8 +25,8 @@
 					<p>Would you prefer to play the content locally or via chromecast?</p>
 				</div>
 				<div class="modal-footer">
-					<button name='local' type="submit" class="btn btn-primary">Local</button>
-					<button name='chromecast' type="submit" class="btn btn-primary">Chromecast</button>
+					<button name='local' type="submit" class="btn btn-default">Local</button>
+					<button name='chromecast' type="submit" class="btn btn-default">Chromecast</button>
 				</div>
 			</div>
 			
