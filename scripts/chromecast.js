@@ -29,7 +29,7 @@ function initializeCastApi() {
 //COME BACK TO LATER
 function onInitSuccess() {
 	console.log('init success');
-	
+	launchApp();
 	// storedSession = JSON.parse(localStorage.getItem('storedSession'));
 	// if (storedSession) {
 		// var dateString = storedSession.timestamp;
@@ -158,7 +158,6 @@ function loadMedia() {
 	console.log('session status in load media: ' + session.status);
 	
 	//switch glyphicon and remove launch
-	$('#launch').remove();
 	$('#play > span').removeClass('glyphicon-play');
 	$('#play > span').addClass('glyphicon-pause');
 	

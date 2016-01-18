@@ -57,7 +57,6 @@ function loadChromecastPanel() {
 	var $container = $('#videoRowContainer');
 	$container.append("<div id='playbackPanel' class='container-fluid'></div>");
 	var $playPanel = $('#playbackPanel');
-	$playPanel.append("<button id='launch' type='button' class='btn btn-default chromecast-panel-element' onclick='launchApp();'>Launch Film</button>");
 	$playPanel.append("<button id='play' type='button' class='btn btn-default chromecast-panel-element' onclick='playMedia();'><span class='glyphicon glyphicon-play'></span></button>");
 	$playPanel.append("<button id='stop' type='button' class='btn btn-default chromecast-panel-element' onclick='stopMedia();'><span class='glyphicon glyphicon-stop'></span></button>");
 	$playPanel.append("<button id='volume' type='button' onmouseover='volumeTag();' onmouseout='hideVolume();' class='btn btn-default chromecast-panel-element'>\
