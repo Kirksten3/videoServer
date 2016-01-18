@@ -31,6 +31,10 @@ function hideVolume() {
 	div.hide();
 }
 
+$('#moviesNav').click(function(){
+	location.href = '?controller=video&action=movies';	
+});
+
 $(function(){
 	$('#hoverBox').hide();
 });

@@ -4,9 +4,43 @@
 	function checkDirectory(){
 		$files = scandir('movies/');
 		sort($files);
+		$previous = null;
+		$counter = 0;
 		foreach($files as $file){
 			if($file != "." && $file != ".." && checkFileType($file)){
+				if($previous[0] != $file[0] || ($previous == null && $file[0])){
+					if($counter == 0){
+						echo "<h2>$file[0]</h2>";
+					}
+					else {
+						echo "<hr /><h2>$file[0]</h2>";
+					}
+
+					
+				}
+				$counter++;
 				theButtonizer($file);
+				$previous = $file;
+			}
+		}
+	}
+	
+	//checks top four most recent modification times
+	//FINISH ME
+	function checkMovieModificationTime(){
+		$files = scandir('movies/');
+		$time = array();
+		$recent = array();
+		foreach($files as $file){
+			array_push($time,filemtime($file));
+		}
+		$mostRecent = null;
+		for($i = 0; $i < count($files); $i++){
+			for($j = 0; $j < count($files); $i++){
+				if($time[$i] < $time[$j]){
+					$mostRecent = $file;
+				}
+				
 			}
 		}
 	}

@@ -12,5 +12,8 @@
 		public function search(){
 			require_once('views/video/search.php');
 		}
+		public function movies(){
+			require_once('views/video/movies.php');
+		}
 	}
 ?>

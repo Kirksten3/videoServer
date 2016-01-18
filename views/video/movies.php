@@ -2,13 +2,13 @@
 	<form id='videoSelection' action="?controller=video&action=video" method="post">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<p class="text-center" style="color:#ffffff;">Recent Movie Additions</p>
+			<p class="text-center" style="color:#ffffff;">Pick a Movie!</p>
 		</div>
 		<div class="panel-body">
-			Check the Movies Tab for More Information
+			
 			<?php
-				//require('helpers/phpHelper.php');
-				//checkDirectory();
+				require('helpers/phpHelper.php') ;
+				checkDirectory();
 			?>
 			<input type='hidden' id='selectedMovie' name='selectedMovie' value='' />
 		</div>

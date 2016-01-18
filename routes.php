@@ -12,7 +12,7 @@
 		$controller->{ $action }();
 	}
 	
-	$controllers = array('video' => ['home', 'video', 'error', 'search']);
+	$controllers = array('video' => ['home', 'video', 'movies', 'error', 'search']);
 	
 	if (array_key_exists($controller, $controllers)) {
 		if (in_array($action, $controllers[$controller])) {
