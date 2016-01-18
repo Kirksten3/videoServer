@@ -11,4 +11,26 @@ $('.filmSelect').on('click', function(){
 	$('#selectionModal').modal('show');
 });
 
+function volumeTag() {
+	var volumePos = $('#volume').position();
+	//alert(volumePos);
+	var div = $('#hoverBox');
+	div.show();
+	div.html('Volume: ' + $('#volInput').val());
+	//alert($('#volInput').val());
+	div.css({top: volumePos.top - 40, left: volumePos.left + 4, position:'absolute'});
+}
 
+function updateVolume() {
+	var item = $('#hoverBox');
+	item.html('Volume: ' + $('#volInput').val());
+}
+
+function hideVolume() {
+	var div = $('#hoverBox');
+	div.hide();
+}
+
+$(function(){
+	$('#hoverBox').hide();
+});

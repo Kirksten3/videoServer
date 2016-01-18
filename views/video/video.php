@@ -1,13 +1,13 @@
 <div id="videoContainer" class="container" style="background-color:rgba(0,0,0,0.75);">		
 	<div class="row" style="padding-bottom:15px;padding-top:15px;">
-		<div id="videoRowContainer" class="col-md-2">
+		<div id="videoRowContainer">
 			<?php
-				//require_once('helpers/phpHelper.php');
-				//$resolution = getVideoResolution($_POST['movie']);
+				require_once('helpers/phpHelper.php');
+				$resolution = getVideoResolution($_POST['selectedMovie']);
 			?>
-			<input type="hidden" id="width" value="<?php //echo $resolution[0]; ?>" />
-			<input type="hidden" id="height" value="<?php //echo $resolution[1]; ?>" />
-			<input type="hidden" id="title" value="<?php //echo removeExtension($_POST['selectedFilm']); ?>" />
+			<input type="hidden" id="width" value="<?php echo $resolution[0]; ?>" />
+			<input type="hidden" id="height" value="<?php echo $resolution[1]; ?>" />
+			<input type="hidden" id="title" value="<?php echo removeExtension($_POST['selectedMovie']); ?>" />
 			<input type="hidden" id="fullFilm" value="<?php echo $_POST['selectedMovie'];?>" />
 			<input type="hidden" id="howToPlay" value="<?php
 				if (isset($_POST['local'])) {
@@ -29,6 +29,7 @@
 		</div>
 	</div>
 </div>
+<button id='hoverBox' type='button' class='btn btn-default'></button>
 <footer id="footer"></footer>
 
 <!-- helper for loading video -->

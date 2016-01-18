@@ -39,7 +39,6 @@ function loadVideo(){
 	var video = "<video id='videoPlayer' class='video-js vjs-default-skin' controls preload='auto' \
 		width='" + screenWidth + "' height='" + screenHeight + "' data-setup='{}' style='\
 		float:none;margin:0 auto;'><source src='movies/" + movie + "' type='video/mp4'></video>";
-	alert(video);
 	videoHolder.innerHTML = video;
 }
 
@@ -50,11 +49,23 @@ function loadVideo(){
 //loads the video if chromecast is selected
 function loadChromecast() {
 	mediaURL = 'movies/' + document.getElementById('fullFilm').getAttribute('value');
-	//setTimeout(launchApp(), 2000);
-	var $item = $('#videoRowContainer');
-	$item.append("<button id='play' type='button' style='float:left;' class='btn btn-primary' onclick='launchApp();'><span class='glyphicon glyphicon-play'></span>&nbsp;</button>");
-	$item.append("<button id='stop' type='button' style='float:left;' class='btn btn-primary' onclick='stopMedia();'><span class='glyphicon glyphicon-stop'></span>&nbsp;</button>");
+	loadChromecastPanel();
 }
+
+//loads chromecast playback panel
+function loadChromecastPanel() {
+	var $container = $('#videoRowContainer');
+	$container.append("<div id='playbackPanel' class='container-fluid'></div>");
+	var $playPanel = $('#playbackPanel');
+	$playPanel.append("<button id='launch' type='button' class='btn btn-default chromecast-panel-element' onclick='launchApp();'>Launch Film</button>");
+	$playPanel.append("<button id='play' type='button' class='btn btn-default chromecast-panel-element' onclick='playMedia();'><span class='glyphicon glyphicon-play'></span></button>");
+	$playPanel.append("<button id='stop' type='button' class='btn btn-default chromecast-panel-element' onclick='stopMedia();'><span class='glyphicon glyphicon-stop'></span></button>");
+	$playPanel.append("<button id='volume' type='button' onmouseover='volumeTag();' onmouseout='hideVolume();' class='btn btn-default chromecast-panel-element'>\
+		<input id='volInput' min='1' max='100' step='1' type='range' value='50' \
+		onmouseup='setReceiverVolume(this.value/100,false);updateVolume();' /></button>");
+	
+}
+
 
 function determinePlayback() {
 	var playback = document.getElementById('howToPlay').getAttribute('value');

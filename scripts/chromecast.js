@@ -5,6 +5,7 @@ var storedSession = null;
 var mediaCurrentTime = 0;
 var timer = null;
 var mediaURL = null;
+var currentVolume = 0.5;
 
 //This determines if the chromecast api is available
 window['__onGCastApiAvailable'] = function(loaded, errorInfo){
@@ -89,12 +90,6 @@ function receiverListener(e) {
 	}
 }
 
-//m is an index for a media URL
-//PROBABLY NOT NEEDED
-function selectMedia(m) {
-	console.log('media selected ' + m);	
-}
-
 //launches app and request session
 function launchApp() {
 	console.log('launching app...');
@@ -153,13 +148,20 @@ function loadMedia() {
 	mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
  	mediaInfo.metadata.metadataType = chrome.cast.media.MetadataType.GENERIC;
 
-	var tempTitle = mediaURL.substr(7).substr(-4);
+	var tempTitle = mediaURL.substr(7);
+	tempTitle = tempTitle.slice(0, -4);
 	mediaInfo.metadata.title = tempTitle;
 	
 	var request = new chrome.cast.media.LoadRequest(mediaInfo);
 	request.autoplay = true;
 	request.currentTime = 0;
 	console.log('session status in load media: ' + session.status);
+	
+	//switch glyphicon and remove launch
+	$('#launch').remove();
+	$('#play > span').removeClass('glyphicon-play');
+	$('#play > span').addClass('glyphicon-pause');
+	
 	session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError);
 }
 
@@ -221,8 +223,34 @@ function playMedia() {
 		clearInterval(timer);
 	}
 	
-	//only setup to play for now
-	currentMediaSession.play(null, mediaCommandSuccessCallback.bind(this, 'playing started for ' + currentMediaSession.sessionId), onError);
+	var playPause = $('#play > span');
+	if(playPause.hasClass('glyphicon-play')){
+		playPause.removeClass('glyphicon-play');
+		playPause.addClass('glyphicon-pause');
+		currentMediaSession.play(null, mediaCommandSuccessCallback.bind(this, 'playing started for ' + currentMediaSession.sessionId), onError);
+	}
+	else {
+		playPause.removeClass('glyphicon-pause');
+		playPause.addClass('glyphicon-play');
+		currentMediaSession.pause(null, mediaCommandSuccessCallback.bind(this, 'paused ' + currentMediaSession.sessionId), onError);
+	}
+	
+}
+
+function setReceiverVolume(level, mute) {
+	if (!session) {
+		return;
+	}
+	
+	//if mute is false
+	if (!mute) {
+		session.setReceiverVolumeLevel(level, mediaCommandSuccessCallback.bind(this, 'media set-volume done'), onError);
+		currentVolume = level;
+	}
+	
+	else {
+		session.setReceiverMuted(true, mediaCommandSuccessCallback.bind(this, 'media set-volume done'), onError);
+	}
 }
 
 function stopMedia() {
