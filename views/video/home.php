@@ -5,10 +5,9 @@
 			<p class="text-center" style="color:#ffffff;">Recent Movie Additions</p>
 		</div>
 		<div class="panel-body">
-			Check the Movies Tab for More Information
 			<?php
-				//require('helpers/phpHelper.php');
-				//checkDirectory();
+				require('helpers/phpHelper.php');
+				getRecentConversions();
 			?>
 			<input type='hidden' id='selectedMovie' name='selectedMovie' value='' />
 		</div>

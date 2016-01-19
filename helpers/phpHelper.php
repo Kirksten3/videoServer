@@ -9,6 +9,7 @@
 		foreach($files as $file){
 			if($file != "." && $file != ".." && checkFileType($file)){
 				if($previous[0] != $file[0] || ($previous == null && $file[0])){
+					//get rid of top bar first time through
 					if($counter == 0){
 						echo "<h2>$file[0]</h2>";
 					}
@@ -25,24 +26,27 @@
 		}
 	}
 	
-	//checks top four most recent modification times
-	//FINISH ME
-	function checkMovieModificationTime(){
-		$files = scandir('movies/');
-		$time = array();
-		$recent = array();
-		foreach($files as $file){
-			array_push($time,filemtime($file));
+	//pulls recent movie conversions for home screen
+	function getRecentConversions(){
+		$file2 = fopen('movies/recent.log', 'r');
+		$tempArr = array();
+		while(!feof($file2)){
+			array_push($tempArr, fgets($file2));
 		}
-		$mostRecent = null;
-		for($i = 0; $i < count($files); $i++){
-			for($j = 0; $j < count($files); $i++){
-				if($time[$i] < $time[$j]){
-					$mostRecent = $file;
-				}
-				
+		$tempArr = array_reverse($tempArr);
+		$counter = 0;
+		foreach($tempArr as $f){
+			
+			if($f == "")
+				continue;
+			$f = substr($f, 0, -1);
+			if($counter == 5){
+				break;
 			}
+			theButtonizer($f);
+			$counter++;
 		}
+		 
 	}
 	
 	//returns bool, for matching .mp4, .avi, or .mkv
